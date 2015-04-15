@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="mypack" namespace="/" extends="struts-default">	
+		<!-- 返回类型 -->		
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult">
+				<param name="root">data</param>
+				<param name="contentType">text/html</param>
+				<param name="callbackParameter">jsonp</param>
+			</result-type>
+		</result-types>
+		<!--  -->
+		<!-- 拦截器 -->
+		<interceptors>
+<!-- 			<interceptor name="loginInteceptor" class="com.next.music.interceptor.AccessInterceptor"/>	 -->			
+			<interceptor-stack name="myStack">
+ 				<!-- interceptor-ref name="loginInteceptor" />   -->
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<!-- 默认拦截器 -->
+		<default-interceptor-ref name="myStack" />
+		<default-action-ref name="defaultAction" />
+		<action name="defaultAction" class="com.opensymphony.xwork2.ActionSupport">
+			<result name="success">404.jsp</result>
+		</action>
+		
+		 <action name="login" class="com.next.music.action.LoginAction">
+			<result name="success" type="json" />			
+		</action>
+		
+		<action name="home" class="com.next.music.action.LoginAction" method="home">
+			<result name="success" type="json" />			
+		</action>
+		
+	</package>
+
+</struts>
