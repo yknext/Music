@@ -22,7 +22,9 @@
 		</interceptors>
 		<!-- 默认拦截器 -->
 		<default-interceptor-ref name="myStack" />
+		<!-- 默认action -->
 		<default-action-ref name="defaultAction" />
+		
 		<action name="defaultAction" class="com.opensymphony.xwork2.ActionSupport">
 			<result name="success">404.jsp</result>
 		</action>
