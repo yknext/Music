@@ -7,7 +7,11 @@ import org.springframework.stereotype.Service;
 import com.next.music.entity.MUser;
 
 
-
+/**
+ * 
+ * @author Next
+ *
+ */
 public abstract interface UserService {
 	
 	public abstract void saveUser(MUser user);	

@@ -33,7 +33,7 @@ public class LoginInteceptor extends MethodFilterInterceptor{
 		ServletResponse servletResponse = (ServletResponse) ac.get(StrutsStatics.HTTP_RESPONSE);
 		
 		Object loginUserId = ac.getSession().get(Contents.SES_USER_ID);
-		System.out.println("登录用户ID为:" + loginUserId);
+		//System.out.println("登录用户ID为:" + loginUserId);
 		// 用户未登录
 		if (loginUserId == null) {
 			servletContext.getServletContextName();

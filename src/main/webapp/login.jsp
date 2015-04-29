@@ -3,7 +3,7 @@
 <html lang="cn">
 <head>
     <meta charset="utf-8">
-    <title>后台管理系统</title>
+    <title>Hadoop云音乐后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
     <meta name="author" content="Muhammad Usman">
@@ -40,6 +40,14 @@
 	
 	$(document).ready(function()
 	{
+		var cookie_username = $.cookie('music_user');
+		var cookie_password = $.cookie('music_pass');
+		
+		if(cookie_username != null)
+			{
+				$("#username").attr("value",cookie_username);
+				$("#password").attr("value",cookie_password);
+			}
 		$("#loginbutton").click(
 				function()
 				{
@@ -54,7 +62,16 @@
 					$.post(url,login_json,function(data)
 							{
 								if(null != data && data.success == true)
-									{
+									{		
+									
+									if($('#remember').prop('checked'))
+										{
+											$.cookie('music_user', $("#username").val(), { expires: 7 });
+											$.cookie('music_pass', $("#password").val(), { expires: 7 });
+										}
+									if(data.data == "success")
+										 window.location.href="Main.jsp"; 
+									else
 										alert(data.data);										
 									}
 								else
@@ -75,7 +92,7 @@
         
     <div class="row">
         <div class="col-md-12 center login-header">
-            <h2>Welcome to Charisma</h2>
+            <h2>Welcome</h2>
         </div>
         <!--/span-->
     </div><!--/row-->
@@ -100,7 +117,7 @@
                     <div class="clearfix"></div>
 
                     <div class="input-prepend">
-                        <label class="remember" for="remember"><input type="checkbox" id="remember"> Remember me</label>
+                        <label class="remember" for="remember"><input type="checkbox" name="checkbox" id="remember"> Remember me</label>
                     </div>
                     <div class="clearfix"></div>
 

@@ -9,6 +9,11 @@ import com.next.music.util.Data;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+/**
+ * 
+ * @author Next
+ *
+ */
 @Controller
 public class BaseAction extends ActionSupport {
 

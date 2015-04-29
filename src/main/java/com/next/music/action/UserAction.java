@@ -8,6 +8,11 @@ import com.next.music.entity.MUser;
 import com.next.music.service.UserService;
 import com.next.music.util.Contents;
 
+/**
+ * 
+ * @author Next
+ * 
+ */
 @Controller
 public class UserAction extends BaseAction{
 	private static final long serialVersionUID = 7234523451234123L;
@@ -27,7 +32,7 @@ public class UserAction extends BaseAction{
 		MUser realUser = userService.findUserByNameAndPassword(user);
 		if(realUser != null)
 		{
-			setData("登录成功");
+			setData(SUCCESS);
 			putSession(Contents.SES_USER_ID, realUser.getId());
 		}
 		else

@@ -6,7 +6,11 @@ import com.next.music.entity.MUser;
 
 
 
-
+/**
+ * 
+ * @author Next
+ *
+ */
 public abstract interface UserDao {
 	
 	/**

@@ -8,6 +8,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="music_user")
+/**
+ * 
+ * @author Next
+ *
+ */
 public class MUser
 {
   @Id
