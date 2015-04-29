@@ -11,93 +11,70 @@
      http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+       
      
-     <!-- 主要数据库连接池 
-     <bean id="mainDS" class="bitronix.tm.resource.jdbc.PoolingDataSource" init-method="init" destroy-method="close">
-        <property name="className" value="${db.driver}" />
-        <property name="uniqueName" value="jdbc/mainDS" />
-        <property name="minPoolSize" value="1" />
-        <property name="maxPoolSize" value="20" />
-        <property name="driverProperties">
-            <props>
-                <prop key="url">${db.url}</prop>
-                <prop key="user">${db.username}</prop>
-                <prop key="password">${db.password}</prop>
-            </props>
+     <!-- 定义数据源 -->
+    <bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/test"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+      
+    <!-- session工厂，是Spring加工过的 -->  
+    <bean id="sessionFactory"
+        class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">  
+        <property name="dataSource">  
+            <ref bean="dataSource" />  
+        </property>  
+        <property name="configLocation" value="classpath:hibernate.cfg.xml"/>  
+        <!-- 自动扫描注解方式配置的hibernate类文件 -->  
+        <property name="packagesToScan">  
+            <list>  
+                <value>com.next.music.entity</value>  
+            </list>  
         </property>
-    </bean>
-    -->
-   <!--  账户数据库连接池   -->
-    <bean id="accountDS" class="bitronix.tm.resource.jdbc.PoolingDataSource" init-method="init" destroy-method="close">
-        <property name="className" value="${db2.driver}" />
-        <property name="uniqueName" value="jdbc/accountDS" />
-        <property name="minPoolSize" value="1" />
-        <property name="maxPoolSize" value="20" />
-        <property name="driverProperties">
-            <props>
-                <prop key="url">${db2.url}</prop>
-                <prop key="user">${db2.username}</prop>
-                <prop key="password">${db2.password}</prop>
-            </props>
-        </property>
-    </bean>
-<!-- 
-    <bean id="mainSessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-        <property name="dataSource" ref="mainDS" />
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
-                <prop key="hibernate.jdbc.fetch_size">20</prop>
-                <prop key="hibernate.jdbc.batch_size">20</prop>
-                <prop key="hibernate.order_updates">true</prop>
-                <prop key="hibernate.cache.use_second_level_cache">false</prop>
-                <prop key="hibernate.show_sql">false</prop>
-            </props>
-        </property>
-       <property name="packagesToScan">
-        	<array>
-        		<value>com.next.music.entity</value>
-        	</array>
-        </property>
-    </bean>
-      <alias name="mainSessionFactory" alias="sessionFactory"/>
-      -->
+    </bean>  
+  
+    <!-- 配置事务管理器 -->  
+    <bean id="transactionManager"  
+        class="org.springframework.orm.hibernate4.HibernateTransactionManager">  
+        <property name="sessionFactory" ref="sessionFactory" />  
+    </bean>  
+  
+    <!-- 配置事务通知属性 -->  
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">  
+        <!-- 定义事务传播属性 -->  
+        <tx:attributes>  
+            <tx:method name="insert*" propagation="REQUIRED" />  
+            <tx:method name="update*" propagation="REQUIRED" />  
+            <tx:method name="edit*" propagation="REQUIRED" />  
+            <tx:method name="save*" propagation="REQUIRED" />  
+            <tx:method name="add*" propagation="REQUIRED" />  
+            <tx:method name="new*" propagation="REQUIRED" />  
+            <tx:method name="set*" propagation="REQUIRED" />  
+            <tx:method name="remove*" propagation="REQUIRED" />  
+            <tx:method name="delete*" propagation="REQUIRED" />  
+            <tx:method name="change*" propagation="REQUIRED" />  
+            <tx:method name="get*" propagation="REQUIRED" read-only="true" />  
+            <tx:method name="find*" propagation="REQUIRED" read-only="true" />  
+            <tx:method name="load*" propagation="REQUIRED" read-only="true" />  
+            <tx:method name="*" propagation="REQUIRED" read-only="true" />  
+        </tx:attributes>  
+    </tx:advice>  
+      
+   
+    <!-- 配置事务切面 -->  
+    <aop:config>  
+        <aop:pointcut id="serviceOperation"  
+            expression="execution(* com.next.music.service..*.*(..))" />  
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" />  
+    </aop:config>  
+  
+    <!-- 自动加载构建bean，设置需要进行Spring注解扫描的类包 -->  
+    <context:component-scan base-package="com.next.music" />  
+  
+     
     
-    <bean id="accountSessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-        <property name="dataSource" ref="accountDS" />
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
-                <prop key="hibernate.jdbc.fetch_size">20</prop>
-                <prop key="hibernate.jdbc.batch_size">20</prop>
-                <prop key="hibernate.order_updates">true</prop>
-                <prop key="hibernate.cache.use_second_level_cache">false</prop>
-                <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
-            </props>
-        </property>
-        <property name="packagesToScan">
-        	<array>
-         		<value>com.next.music.entity</value>
-        	</array>
-         </property>
-    </bean>
-     
-     
-     
-     	<!-- JTA事务配置 -->
-    <bean id="btmConfig" factory-method="getConfiguration" class="bitronix.tm.TransactionManagerServices">
-      <property name="logPart1Filename" value="${btm.log.1}" />
-      <property name="logPart2Filename" value="${btm.log.2}" />
-      <property name="defaultTransactionTimeout" value="600"/>
-    </bean>
-    <bean id="btm" factory-method="getTransactionManager" class="bitronix.tm.TransactionManagerServices" destroy-method="shutdown" depends-on="btmConfig"/>
-    <bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
-        <property name="transactionManager" ref="btm" />
-        <property name="userTransaction" ref="btm" />
-    </bean>
-    <tx:annotation-driven transaction-manager="transactionManager" />
-     
-     
-     
 </beans>

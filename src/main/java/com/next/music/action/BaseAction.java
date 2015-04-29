@@ -3,11 +3,13 @@ package com.next.music.action;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.StrutsStatics;
+import org.springframework.stereotype.Controller;
 
 import com.next.music.util.Data;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+@Controller
 public class BaseAction extends ActionSupport {
 
 	private static final long serialVersionUID = -300312364285482112L;

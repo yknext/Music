@@ -14,9 +14,10 @@
 		<!--  -->
 		<!-- 拦截器 -->
 		<interceptors>
-<!-- 			<interceptor name="loginInteceptor" class="com.next.music.interceptor.AccessInterceptor"/>	 -->			
+			<interceptor name="loginInteceptor" class="com.next.music.interceptor.LoginInteceptor"/>	
+			<!-- 自定义拦截器栈 -->		
 			<interceptor-stack name="myStack">
- 				<!-- interceptor-ref name="loginInteceptor" />   -->
+ 				<interceptor-ref name="loginInteceptor" />
 				<interceptor-ref name="defaultStack" />
 			</interceptor-stack>
 		</interceptors>
@@ -26,16 +27,21 @@
 		<default-action-ref name="defaultAction" />
 		
 		<action name="defaultAction" class="com.opensymphony.xwork2.ActionSupport">
-			<result name="success">404.jsp</result>
+			<result name="success">404.html</result>
+			<interceptor-ref name="defaultStack" />
 		</action>
 		
-		 <action name="login" class="com.next.music.action.LoginAction">
-			<result name="success" type="json" />			
+		 <action name="userAction" class="com.next.music.action.UserAction">
+			<interceptor-ref name="defaultStack" />
+			<result name="success" type="json" />	
+			<result name="error" type="json" />
+			
 		</action>
 		
-		<action name="home" class="com.next.music.action.LoginAction" method="home">
-			<result name="success" type="json" />			
+		<action name="main" class="com.next.music.action.UserAction" method="test">
+			<result name="success">Main.jsp</result>
 		</action>
+		
 		
 	</package>
 

@@ -1,23 +1,18 @@
 package com.next.music.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name="music_user")
 public class MUser
 {
-
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private int id;
-
-  @Column(name="real_name")
   private String realName;
   private String username;
   private String password;
