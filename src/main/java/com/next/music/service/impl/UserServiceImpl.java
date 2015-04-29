@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public MUser findUserByNameAndPassword(MUser user) {
-		return baseDao.get("from MUser u where u.username=?1 and u.password=?2", new Object[]{user.getUsername(),user.getPassword()});
+		return baseDao.get("from MUser u where u.username=?0 and u.password=?1 ", new Object[]{user.getUsername(),user.getPassword()});
 	}
 	
 	

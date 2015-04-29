@@ -53,11 +53,11 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		return this.getCurrentSession().createQuery(hql).list();
 	}
 
-	public List<T> find(String hql, Object[] param) {
+	public List<T> find(String hql, Object[] param) {			
 		Query q = this.getCurrentSession().createQuery(hql);
 		if (param != null && param.length > 0) {
 			for (int i = 0; i < param.length; i++) {
-				q.setParameter(i, param[i]);
+				q.setParameter(i+"", param[i]);
 			}
 		}
 		return q.list();
@@ -67,7 +67,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		Query q = this.getCurrentSession().createQuery(hql);
 		if (param != null && param.size() > 0) {
 			for (int i = 0; i < param.size(); i++) {
-				q.setParameter(i, param.get(i));
+				q.setParameter(i+"", param.get(i));
 			}
 		}
 		return q.list();
@@ -83,7 +83,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		Query q = this.getCurrentSession().createQuery(hql);
 		if (param != null && param.length > 0) {
 			for (int i = 0; i < param.length; i++) {
-				q.setParameter(i, param[i]);
+				q.setParameter(i+"", param[i]);
 			}
 		}
 		return q.setFirstResult((page - 1) * rows).setMaxResults(rows).list();
@@ -99,7 +99,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		Query q = this.getCurrentSession().createQuery(hql);
 		if (param != null && param.size() > 0) {
 			for (int i = 0; i < param.size(); i++) {
-				q.setParameter(i, param.get(i));
+				q.setParameter(i+"", param.get(i));
 			}
 		}
 		return q.setFirstResult((page - 1) * rows).setMaxResults(rows).list();
@@ -135,7 +135,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		Query q = this.getCurrentSession().createQuery(hql);
 		if (param != null && param.length > 0) {
 			for (int i = 0; i < param.length; i++) {
-				q.setParameter(i, param[i]);
+				q.setParameter(i+"", param[i]);
 			}
 		}
 		return (Long) q.uniqueResult();
@@ -145,7 +145,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		Query q = this.getCurrentSession().createQuery(hql);
 		if (param != null && param.size() > 0) {
 			for (int i = 0; i < param.size(); i++) {
-				q.setParameter(i, param.get(i));
+				q.setParameter(i+"", param.get(i));
 			}
 		}
 		return (Long) q.uniqueResult();
@@ -159,7 +159,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		Query q = this.getCurrentSession().createQuery(hql);
 		if (param != null && param.length > 0) {
 			for (int i = 0; i < param.length; i++) {
-				q.setParameter(i, param[i]);
+				q.setParameter(i+"", param[i]);
 			}
 		}
 		return q.executeUpdate();
@@ -169,7 +169,7 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		Query q = this.getCurrentSession().createQuery(hql);
 		if (param != null && param.size() > 0) {
 			for (int i = 0; i < param.size(); i++) {
-				q.setParameter(i, param.get(i));
+				q.setParameter(i+"", param.get(i));
 			}
 		}
 		return q.executeUpdate();
