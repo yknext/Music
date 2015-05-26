@@ -17,6 +17,7 @@ public abstract interface UserService {
 	public abstract void saveUser(MUser user);	
 	public abstract void updateUser(MUser user);	
 	public abstract MUser findUserById(int id);	
+	public abstract MUser findUserByName(String name);	
 	public abstract void deleteUser(MUser user);	
 	public abstract List<MUser> findAllList();	
 	public abstract MUser findUserByNameAndPassword(MUser user);

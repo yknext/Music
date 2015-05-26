@@ -2,8 +2,20 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-	<package name="mypack" namespace="/" extends="struts-default">	
-		<!-- 返回类型 -->		
+	<constant name="struts.multipart.saveDir" value="E:\\musicapp\\tmp"></constant>
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.action.extension" value="" />
+	<constant name="struts.multipart.maxSize" value="900000000" />
+	<constant name="struts.devMode" value="true" />
+	<package name="default" namespace="/" extends="struts-default">
+		<default-action-ref name="index"></default-action-ref>
+		<action name="index">
+			<result name="success">index.jsp</result>
+		</action>
+	</package>
+
+	<package name="api" namespace="/adsfadcv" extends="struts-default">
+		<!-- 返回类型 -->
 		<result-types>
 			<result-type name="json" class="org.apache.struts2.json.JSONResult">
 				<param name="root">data</param>
@@ -11,38 +23,49 @@
 				<param name="callbackParameter">jsonp</param>
 			</result-type>
 		</result-types>
-		<!--  -->
-		<!-- 拦截器 -->
-		<interceptors>
-			<interceptor name="loginInteceptor" class="com.next.music.interceptor.LoginInteceptor"/>	
-			<!-- 自定义拦截器栈 -->		
-			<interceptor-stack name="myStack">
- 				<interceptor-ref name="loginInteceptor" />
-				<interceptor-ref name="defaultStack" />
-			</interceptor-stack>
-		</interceptors>
-		<!-- 默认拦截器 -->
-		<default-interceptor-ref name="myStack" />
-		<!-- 默认action -->
-		<default-action-ref name="defaultAction" />
-		
-		<action name="defaultAction" class="com.opensymphony.xwork2.ActionSupport">
-			<result name="success">404.html</result>
+
+		<default-action-ref name="index"></default-action-ref>
+		<action name="index">
+			<result name="success">index.jsp</result>
+		</action>
+
+		<!-- 登录 -->
+		<action name="user" class="com.next.music.action.UserAction">
+			<result name="success" type="json" />
+		</action>
+		<!-- 注册 -->
+		<action name="reg" class="com.next.music.action.UserAction"
+			method="reguser">
+			<result name="success" type="json" />
+		</action>
+		<!-- 获取同步列表 -->
+		<action name="synclist" class="com.next.music.action.MusicAction"
+			method="synclist">
+			<result name="success" type="json" />
+		</action>
+		<!-- 下载文件 -->
+		<action name="download" class="com.next.music.action.MusicAction" method="download">
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream;charset=utf8</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename=${filename}</param>
+				<param name="bufferSize">4096</param>
+			</result>
+		</action>
+
+		<action name="upload" class="com.next.music.action.MusicAction"
+			method="upload">
+			<result name="success" type="json" />
+			<result name="input" type="json" />
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">900000000</param>
+				<param name="allowedExtensions">
+					mp3,wav,wma,ogg,ape,flac,amr,aac,m4a,ape
+				</param>
+			</interceptor-ref>
 			<interceptor-ref name="defaultStack" />
 		</action>
-		
-		 <action name="userAction" class="com.next.music.action.UserAction">
-			<interceptor-ref name="defaultStack" />
-			<result name="success" type="json" />	
-			<result name="error" type="json" />
-			
-		</action>
-		
-		<action name="main" class="com.next.music.action.UserAction" method="test">
-			<result name="success">Main.jsp</result>
-		</action>
-		
-		
+
 	</package>
 
 </struts>

@@ -3,30 +3,36 @@
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee    
   http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-  <!-- 首页 -->
+  <!-- 首页   -->
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index</welcome-file>
 	</welcome-file-list>
-  <!-- 初始化 -->
+ 
+ 
+ <error-page>
+    <error-code>404</error-code>
+    <location>/index.jsp</location>
+ </error-page>
+ 
+  	<!-- 初始化 -->
 	<context-param>
     	<param-name>contextConfigLocation</param-name>
      	<param-value>classpath:spring-*.xml</param-value>
   	 </context-param>
-  	<!-- 监听器 -->
 	<!-- 配置spring监听器 -->  
 	<listener>  
 	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>  
 	</listener>  
   
-  <!-- 定义struts2的核心filter -->
-  <filter>
-		<filter-name>struts2</filter-name>
-		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
-	</filter>
- <!-- 让struts定义的核心filter拦截所有请求 -->
-	<filter-mapping>
-		<filter-name>struts2</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+	  <!-- 定义struts2的核心filter -->
+	  <filter>
+			<filter-name>struts2</filter-name>
+			<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	  </filter>
+	 	<!-- 让struts定义的核心filter拦截所有请求 -->
+		<filter-mapping>
+			<filter-name>struts2</filter-name>
+			<url-pattern>/*</url-pattern>
+		</filter-mapping>
 	
 </web-app>

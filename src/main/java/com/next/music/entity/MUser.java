@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.next.music.util.LoginData;
+
 @Entity
 @Table(name="music_user")
 /**
@@ -18,13 +20,13 @@ public class MUser
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private int id;
-  private String realName;
   private String username;
   private String password;
   private String mobile;
   private String email;
   private int status;
-
+  
+  
   public int getId()
   {
     return this.id;
@@ -66,13 +68,6 @@ public class MUser
     this.status = status;
   }
 
-  public String getRealName() {
-    return this.realName;
-  }
-
-  public void setRealName(String realName) {
-    this.realName = realName;
-  }
 
   public String getEmail() {
     return this.email;

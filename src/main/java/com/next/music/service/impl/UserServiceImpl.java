@@ -47,6 +47,12 @@ public class UserServiceImpl implements UserService{
 	public MUser findUserByNameAndPassword(MUser user) {
 		return baseDao.get("from MUser u where u.username=?0 and u.password=?1 ", new Object[]{user.getUsername(),user.getPassword()});
 	}
+
+	@Override
+	public MUser findUserByName(String name) {
+		// TODO Auto-generated method stub
+		return baseDao.get("from MUser u where u.username=?0", new Object[]{name});
+	}
 	
 	
 }
