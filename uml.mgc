@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <Class name="com.next.music.service.UserService" x="195" y="389">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="com.next.music.entity.MUser" x="182" y="234">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="com.next.music.entity.Music" x="30" y="398">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="com.next.music.service.TokenService" x="527" y="391">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="com.next.music.util.LoginData" x="39" y="145">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="com.next.music.entity.Token"
+            endpointName="token" kind="Simple"/>
+    </Class>
+    <Class name="com.next.music.util.Data" x="42" y="10">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="com.next.music.dao.impl.UserDaoImpl" x="574" y="104">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.next.music.dao.UserDao"/>
+    </Class>
+    <Class name="com.next.music.action.MusicAction" x="364" y="14">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.next.music.action.BaseAction"/>
+        <Association
+            destinationClassName="com.next.music.service.TokenService"
+            endpointName="tokenService" kind="Simple"/>
+        <Association
+            destinationClassName="com.next.music.service.MusicService"
+            endpointName="musicService" kind="Simple"/>
+        <Association
+            destinationClassName="com.next.music.service.UserService"
+            endpointName="userService" kind="Simple"/>
+        <Communication destinationClassName="com.next.music.service.MusicService"/>
+        <Communication destinationClassName="com.next.music.action.BaseAction"/>
+        <Communication destinationClassName="com.next.music.entity.Music"/>
+        <Communication destinationClassName="com.next.music.service.TokenService"/>
+        <Communication destinationClassName="com.next.music.util.Data"/>
+    </Class>
+    <Class name="com.next.music.action.UserAction" x="209" y="134">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Extension destinationClassName="com.next.music.action.BaseAction"/>
+        <Association
+            destinationClassName="com.next.music.service.TokenService"
+            endpointName="tokenService" kind="Simple"/>
+        <Association destinationClassName="com.next.music.entity.MUser"
+            endpointName="user" kind="Simple"/>
+        <Association
+            destinationClassName="com.next.music.util.LoginData"
+            endpointName="logindata" kind="Simple"/>
+        <Association
+            destinationClassName="com.next.music.service.UserService"
+            endpointName="userService" kind="Simple"/>
+        <Communication destinationClassName="com.next.music.service.UserService"/>
+        <Communication destinationClassName="com.next.music.entity.MUser"/>
+        <Communication destinationClassName="com.next.music.action.BaseAction"/>
+        <Communication destinationClassName="com.next.music.service.TokenService"/>
+        <Communication destinationClassName="com.next.music.util.LoginData"/>
+        <Communication destinationClassName="com.next.music.util.Data"/>
+    </Class>
+    <Class name="com.next.music.dao.UserDao" x="574" y="12">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="com.next.music.service.MusicService" x="573" y="195">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+    <Class name="com.next.music.action.BaseAction" x="225" y="33">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+        <Association destinationClassName="com.next.music.util.Data"
+            endpointName="data" kind="Simple"/>
+        <Communication destinationClassName="com.next.music.util.Data"/>
+    </Class>
+    <Class name="com.next.music.entity.Token" x="28" y="239">
+        <AttributesDisplayFilter public-accepted="true"
+            private-accepted="true" protected-accepted="true"
+            default-accepted="true" static-accepted="false"/>
+        <MethodDisplayFilter public-accepted="true"
+            private-accepted="false" protected-accepted="false"
+            default-accepted="false" static-accepted="false"
+            accessors-accepted="false" constructors-accepted="false"/>
+    </Class>
+</ClassDiagram>

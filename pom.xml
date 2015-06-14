@@ -205,7 +205,7 @@
 			<artifactId>aspectjtools</artifactId>
 			<version>1.6.5</version>
 		</dependency>
-		<!-- Hadoop -->
+		<!-- Hadoop 
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-hadoop</artifactId>
@@ -219,7 +219,7 @@
 			<systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
 		</dependency>
 		
-		
+		-->
 		
 		
 	</dependencies>

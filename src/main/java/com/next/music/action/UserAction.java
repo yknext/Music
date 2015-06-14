@@ -29,6 +29,10 @@ public class UserAction extends BaseAction{
 	@Resource
 	TokenService tokenService;
 	
+	/**
+	 * 注册
+	 * @return
+	 */
 	public String reguser()
 	{
 		long start = System.currentTimeMillis();

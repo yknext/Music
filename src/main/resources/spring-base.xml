@@ -29,7 +29,6 @@
 		<property name="url" value="jdbc:mysql://localhost:3306/music?useUnicode=true&amp;characterEncoding=UTF-8"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="root"></property>
-		
 	</bean>
       
     <!-- session工厂，是Spring加工过的 -->  
